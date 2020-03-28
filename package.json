@@ -39,6 +39,6 @@
     "fs-extra": "^9.0.0"
   },
   "peerDependencies": {
-    "justauthenticateme-apigateway-auth": "0.0.7"
+    "justauthenticateme-apigateway-auth": "0.0.8"
   }
 }
