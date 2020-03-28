@@ -84,7 +84,7 @@ module.exports.handler = authHandler(appId, options);
     this.service.functions.justauthenticatemeCustomAuthorizer = {
       description: "Serverless JustAuthenticateMe Plugin",
       handler,
-      name: `${this.service}-${this.stage}-justauthenticatemeCustomAuthorizer`,
+      name: `${this.service.service}-${this.stage}-justauthenticatemeCustomAuthorizer`,
       runtime: "nodejs12.x",
       events: []
     };
