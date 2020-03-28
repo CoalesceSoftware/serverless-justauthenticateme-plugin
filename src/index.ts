@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-export default class JustAuthenticateMePlugin {
+export = class JustAuthenticateMePlugin {
   private serverless: any;
   private options: any;
   private provider: any;
@@ -9,30 +9,35 @@ export default class JustAuthenticateMePlugin {
   private service: any;
   private stage: string;
   private config: {
-    appId: string | {
-      [key: string]: string
-    }
-    options: any
+    appId:
+      | string
+      | {
+          [key: string]: string;
+        };
+    options: any;
   };
 
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options;
-    this.provider = this.serverless.getProvider('aws');
+    this.provider = this.serverless.getProvider("aws");
 
     this.service = this.serverless.service;
-    this.stage = this.options.stage && this.options.stage.length > 0
-      ? this.options.stage
-      : this.service.provider.stage;
+    this.stage =
+      this.options.stage && this.options.stage.length > 0
+        ? this.options.stage
+        : this.service.provider.stage;
     if (!this.service.custom.justauthenticateme) {
-      throw new Error("JustAuthenticateMe Plugin requires config at `custom.justauthenticateme`");
+      throw new Error(
+        "JustAuthenticateMe Plugin requires config at `custom.justauthenticateme`"
+      );
     }
     this.config = this.service.custom.justauthenticateme;
-    this.config.options = this.config.options ?? {}
+    this.config.options = this.config.options ?? {};
 
     /* Hooks tell Serverless when to do what */
     this.hooks = {
-      'package:initialize': this.packageInitializeHook.bind(this),
+      "package:initialize": this.packageInitializeHook.bind(this)
     };
   }
 
@@ -51,7 +56,9 @@ export default class JustAuthenticateMePlugin {
       appId = this.config.appId[this.stage];
     }
     if (!appId) {
-      throw new Error("JustAuthenticateMe Plugin requires appId to be specified");
+      throw new Error(
+        "JustAuthenticateMe Plugin requires appId to be specified"
+      );
     }
 
     const authFunction = `'use strict';
@@ -63,7 +70,11 @@ module.exports.handler = authHandler(appId, options);
 }`;
 
     const folderPath = path.join(".serverless", "_justauthenticateme_plugin");
-    const artifactPath = path.join(this.serverless.config.servicePath, folderPath, "authorizer.js");
+    const artifactPath = path.join(
+      this.serverless.config.servicePath,
+      folderPath,
+      "authorizer.js"
+    );
     const handler = path.join(folderPath, "authorizer") + ".handler";
 
     // Write auth function file
@@ -71,10 +82,10 @@ module.exports.handler = authHandler(appId, options);
 
     // Add auth function to service.functions
     this.service.functions.justauthenticatemeCustomAuthorizer = {
-      description: 'Serverless JustAuthenticateMe Plugin',
+      description: "Serverless JustAuthenticateMe Plugin",
       handler,
       name: `${this.service}-${this.stage}-justauthenticatemeCustomAuthorizer`,
-      runtime: 'nodejs12.x',
+      runtime: "nodejs12.x"
     };
   }
 
@@ -86,7 +97,7 @@ module.exports.handler = authHandler(appId, options);
         httpEvent.http.authorizer = {
           name: "justauthenticatemeCustomAuthorizer",
           type: "request"
-        }
+        };
       }
     }
   }
@@ -95,7 +106,7 @@ module.exports.handler = authHandler(appId, options);
     // Add default 4xx response to resources so 4xx responses have cors
     if (this.serverless.service.resources === undefined) {
       this.serverless.service.resources = {
-        Resources: {},
+        Resources: {}
       };
     } else if (this.serverless.service.resources.Resources === undefined) {
       this.serverless.service.resources.Resources = {};
