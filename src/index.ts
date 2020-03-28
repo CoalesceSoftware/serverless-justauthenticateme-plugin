@@ -69,7 +69,7 @@ const options = ${JSON.stringify(this.config.options)};
 module.exports.handler = authHandler(appId, options);
 `;
 
-    const folderPath = path.join(".serverless", "_justauthenticateme_plugin");
+    const folderPath = path.join("dist", "_justauthenticateme_plugin");
     const artifactPath = path.join(
       this.serverless.config.servicePath,
       folderPath,
