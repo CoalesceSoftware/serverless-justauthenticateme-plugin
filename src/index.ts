@@ -92,7 +92,7 @@ module.exports.handler = authHandler(appId, options);
   injectAuthorizerConfigurations() {
     for (const functionName of this.service.getAllFunctions()) {
       const fn = this.service.getFunction(functionName);
-      const httpEvent = fn.events.find(e => Object.keys(e)[0] === "http");
+      const httpEvent = fn.events?.find(e => Object.keys(e)[0] === "http");
       if (httpEvent?.http.authorizer === "justauthenticateme") {
         httpEvent.http.authorizer = {
           name: "justauthenticatemeCustomAuthorizer",
