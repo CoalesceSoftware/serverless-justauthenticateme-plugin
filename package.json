@@ -1,6 +1,6 @@
 {
   "name": "serverless-justauthenticateme-plugin",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Serverless Framework Plugin for https://www.justauthenticate.me",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
