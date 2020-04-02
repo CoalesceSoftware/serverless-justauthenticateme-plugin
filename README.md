@@ -70,7 +70,7 @@ custom:
 
 #### Step 3: Specify Authenticated Endpoints
 
-For each endpoint that shuold only be accessible by authenticated users, specify the authorizer as the
+For each endpoint that should only be accessible by authenticated users, specify the authorizer as the
 keyword `justauthenticateme` like so:
 
 ```yaml
