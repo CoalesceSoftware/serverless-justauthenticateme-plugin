@@ -18,7 +18,7 @@
 [JustAuthenticateMe](https://www.justauthenticate.me) offers simple magic link based authentication as a
 service for web apps. This is a serverless plugin that automatically authenticates your serverless
 endpoints using JustAuthenticateMe. It uses the
-[JustAuthenticateMe API Gateway Custom Authorizer](https://https://github.com/CoalesceSoftware/justauthenticateme-apigateway-auth)
+[JustAuthenticateMe API Gateway Custom Authorizer](https://github.com/CoalesceSoftware/justauthenticateme-apigateway-auth)
 to verify incoming requests and pass the user's email on to your endpoint handler.
 
 ## Supported Platforms
