@@ -36,7 +36,8 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "fs-extra": "^9.0.0"
+    "fs-extra": "^9.0.0",
+    "justauthenticateme-apigateway-auth": "^1.0.1"
   },
   "peerDependencies": {
     "justauthenticateme-apigateway-auth": "0.0.8"
